@@ -1,7 +1,7 @@
-iso7064
-=======
+ISO/IEC 7064
+============
 
-A Java library that calculates/validates ISO/IEC 7064 check characters.
+A Java library that calculates/validates [ISO/IEC 7064](https://github.com/homebeaver/ungueltig/wiki/ISO-IEC_7064) check characters.
 
 The algorithms currently included are all pure systems and pure polynomial implementations of:
 * ISO/IEC 7064, MOD 11-2 for numeric strings with one check digit or the supplementary check character "X"
