@@ -46,9 +46,33 @@
   </developers>
   <inceptionYear>2012</inceptionYear> <!-- by danieltwagner -->
 
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>https://github.com/homebeaver/isoiec7064</url>
+    <connection>scm:git:https://github.com/homebeaver/isoiec7064.git</connection>
+    <developerConnection>scm:git:https://github.com/homebeaver/</developerConnection>
+  </scm>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 
   <build>
     <pluginManagement>
@@ -67,12 +91,72 @@
     </pluginManagement>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+<!-- ??? TODO
+gpg: no default secret key: Kein geheimer Schlüssel
+gpg: signing failed: Kein geheimer Schlüssel
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+  use simplify4u -->
+      <plugin>
+        <groupId>org.simplify4u.plugins</groupId>
+        <artifactId>sign-maven-plugin</artifactId>
+        <version>1.1.0</version>
+        <executions>
+            <execution>
+                <goals>
+                    <goal>sign</goal>
+                </goals>
+                <configuration>
+                    <!-- the same id as in settings.xml -->
+                    <serverId>sign-key-id</serverId>
+                </configuration>
+            </execution>
+        </executions>
+      </plugin>
+      <plugin>
          <groupId>org.apache.maven.plugins</groupId>
          <artifactId>maven-compiler-plugin</artifactId>
-         <version>2.3.2</version> <!-- nicht notwendig wenn parent definiert ist -->
+         <version>3.8.1</version> <!-- nicht notwendig wenn parent definiert ist -->
          <configuration>
-           <source>1.8</source>
-           <target>1.8</target>
+           <source>8</source>
+           <target>8</target>
          </configuration>
       </plugin>
       <plugin>
@@ -81,8 +165,8 @@
         <version>3.5.0</version>
         <configuration>
           <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
-          <!-- TODO <includeTestSourceDirectory>true</includeTestSourceDirectory> -->
-          <!-- Needed to define config_loc -->
+					<!-- TODO <includeTestSourceDirectory>true</includeTestSourceDirectory> -->
+					<!-- Needed to define config_loc -->
           <propertyExpansion>config_loc=${basedir}/src/conf</propertyExpansion>
           <enableRulesSummary>false</enableRulesSummary>
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
@@ -99,6 +183,18 @@
         <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
         <version>0.16.1</version>
+      </plugin>
+<!-- see https://central.sonatype.org/publish/publish-maven/#distribution-management-and-authentication -->
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.13</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
       </plugin>
     </plugins>
   </build>
