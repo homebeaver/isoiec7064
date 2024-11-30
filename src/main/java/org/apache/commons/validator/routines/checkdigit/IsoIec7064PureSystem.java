@@ -32,7 +32,6 @@ Auch in MOD 661-26 sind die zwei (int) pz 0 und 1, was als Buchstaben "AB" liefe
 
 IsoIec7064PurePolynomialSystem ist eine eigene abstrakte Klasse für die polynomiale Implementierung,
 daraus sind dann die endglültigen Klassen abgeleitet
-   IsoIecPure11PolynomialSystem TODO besser IsoIecPolynomial11System
 
 */
 public abstract class IsoIec7064PureSystem extends ModulusCheckDigit {
@@ -46,8 +45,8 @@ public abstract class IsoIec7064PureSystem extends ModulusCheckDigit {
     protected abstract int getRadix();
     /**
      * MOD 11-2 check characters are “0” to “9” plus “X” for example.
-     * @return a String containing characters the check digit is build from
-     * @see {@link IsoIecConstants#NUMERIC}, {@link IsoIecConstants#ALPHABETIC}, {@link IsoIecConstants#ALPHANUMERIC}
+     * @return a String containing characters the check digit is build from.
+     * This can be {@link IsoIecConstants#NUMERIC}, {@link IsoIecConstants#ALPHABETIC}, {@link IsoIecConstants#ALPHANUMERIC}
      * , {@link IsoIecConstants#NUMERIC_PLUS_X}, {@link IsoIecConstants#ALPHANUMERIC_PLUS_STAR}
      */
     protected abstract String getCharacterSet();
@@ -177,7 +176,6 @@ public abstract class IsoIec7064PureSystem extends ModulusCheckDigit {
      * wi = r^(i - 1) (mod M)
      * </pre>
      * where wi is the weight for Position i.
-     * </p>
      * <p>
      * <b>NOTE</b>: do not use {@code Math.pow} for high results, f.i. {@code 10^23 (mod 97) = 56}.
      * Calculate it iteratively instead.

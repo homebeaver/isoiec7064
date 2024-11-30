@@ -39,6 +39,7 @@ import org.apache.commons.validator.GenericValidator;
  *   <li>ISO/IEC 7064, MOD 27,26 applies to alphabetic strings ({@link IsoIecHybrid2726System})</li>
  *   <li>ISO/IEC 7064, MOD 37,36 applies to alphanumeric strings ({@link IsoIecHybrid3736System})</li>
  * </ul>
+ * <p>
  * The two numbers following “MOD” in the designation are the two modulus.
  * </p>
  *

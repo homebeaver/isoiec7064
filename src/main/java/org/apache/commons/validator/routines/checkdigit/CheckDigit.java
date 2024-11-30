@@ -32,12 +32,7 @@ package org.apache.commons.validator.routines.checkdigit;
  * Although Commons Validator is primarily concerned with validation,
  * {@link CheckDigit} also defines behavior for calculating/generating check
  * digits, since it makes sense that users will want to (re-)use the
- * same logic for both. The {@link org.apache.commons.validator.routines.ISBNValidator}
- * makes specific use of this feature by providing the facility to validate ISBN-10 codes
- * and then convert them to the new ISBN-13 standard.
- * </p>
- * <p>
- * CheckDigit is used by the new generic {@link CodeValidator} implementation.
+ * same logic for both.
  * </p>
  *
  * <h2>Implementations</h2>
@@ -45,7 +40,7 @@ package org.apache.commons.validator.routines.checkdigit;
  * <a href="package-summary.html">Package Summary</a> for a full
  * list of implementations provided within Commons Validator.
  *
- * @see org.apache.commons.validator.routines.CodeValidator
+// * @see org.apache.commons.validator.routines.CodeValidator
  * @since 1.4
  */
 public interface CheckDigit {

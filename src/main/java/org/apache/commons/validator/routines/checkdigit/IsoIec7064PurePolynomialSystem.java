@@ -16,6 +16,9 @@
  */
 package org.apache.commons.validator.routines.checkdigit;
 
+/**
+ * TODO comment
+ */
 public abstract class IsoIec7064PurePolynomialSystem extends IsoIec7064PureSystem {
 
     private static final long serialVersionUID = -6198930160531058449L;
@@ -52,6 +55,13 @@ public abstract class IsoIec7064PurePolynomialSystem extends IsoIec7064PureSyste
 //        System.out.println("calculate polynomial " + cp + " for '" + code + "' checksum=" + checksum + " r=" + r);
         return toCheckDigit(checksum);
     }
+    /**
+     * Calculate the modulus value for a code. 
+     * @param code The code to calculate the modulus for.
+     * @param includesCheckDigit Whether the code includes the Check Digit or not.
+     * @return the modulus value for the code
+     * @throws CheckDigitException if an error occurs calculating the modulus for the specified code
+     */
     protected int calculatePolynomial(final String code, final boolean includesCheckDigit) throws CheckDigitException {
         int p = 0;
         int l = includesCheckDigit ? code.length() - getCheckdigitLength() : code.length();
