@@ -116,13 +116,12 @@
           </execution>
         </executions>
       </plugin>
-<!-- ??? TODO
-gpg: no default secret key: Kein geheimer Schlüssel
-gpg: signing failed: Kein geheimer Schlüssel
+
+<!-- see https://maven.apache.org/plugins/maven-gpg-plugin/usage.html
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
-        <version>1.5</version>
+        <version>3.2.7</version>
         <executions>
           <execution>
             <id>sign-artifacts</id>
@@ -130,10 +129,14 @@ gpg: signing failed: Kein geheimer Schlüssel
             <goals>
               <goal>sign</goal>
             </goals>
+            <configuration>
+              <keyname>sign-key-id</keyname>
+              <passphraseServerId>sign-key-id</passphraseServerId>
+            </configuration>
           </execution>
         </executions>
       </plugin>
-  use simplify4u -->
+use simplify4u : -->
       <plugin>
         <groupId>org.simplify4u.plugins</groupId>
         <artifactId>sign-maven-plugin</artifactId>
@@ -150,6 +153,7 @@ gpg: signing failed: Kein geheimer Schlüssel
             </execution>
         </executions>
       </plugin>
+
       <plugin>
          <groupId>org.apache.maven.plugins</groupId>
          <artifactId>maven-compiler-plugin</artifactId>
@@ -165,8 +169,8 @@ gpg: signing failed: Kein geheimer Schlüssel
         <version>3.5.0</version>
         <configuration>
           <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
-					<!-- TODO <includeTestSourceDirectory>true</includeTestSourceDirectory> -->
-					<!-- Needed to define config_loc -->
+          <!-- TODO <includeTestSourceDirectory>true</includeTestSourceDirectory> -->
+          <!-- Needed to define config_loc -->
           <propertyExpansion>config_loc=${basedir}/src/conf</propertyExpansion>
           <enableRulesSummary>false</enableRulesSummary>
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
