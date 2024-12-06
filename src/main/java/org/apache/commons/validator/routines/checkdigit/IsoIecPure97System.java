@@ -19,7 +19,7 @@ package org.apache.commons.validator.routines.checkdigit;
 /**
  * Implements ISO/IEC 7064, MOD 97-10 check digit calculation/validation.
  * <p>
- * MOD 97-10 applies to anumeric strings, the check digit is numeric.
+ * MOD 97-10 applies to numeric strings, the check digit is numeric.
  * See <a href="https://de.wikipedia.org/wiki/ISO/IEC_7064">Wikipedia - ISO/IEC_7064 (de)</a>
  * for more details.
  * </p>
