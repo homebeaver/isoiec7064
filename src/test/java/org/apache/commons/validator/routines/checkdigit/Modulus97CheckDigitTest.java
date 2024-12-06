@@ -24,13 +24,13 @@ import org.junit.jupiter.api.BeforeEach;
  * @author EUG https://github.com/homebeaver
  * @since 1.10.0
  */
-public class IsoIecPure97SystemTest extends AbstractIsoIec7064Test {
+public class Modulus97CheckDigitTest extends AbstractIsoIec7064Test {
 
     private static final String MIN = "000195"; // theoretical minimum
     private static final String MAX = "99999999999999999928"; // theoretical
     private static final String LONG = "999999999999999999999999999916"; // theoretical
 
-    public IsoIecPure97SystemTest() {
+    public Modulus97CheckDigitTest() {
         checkDigitLth = 2;
     }
 
@@ -39,8 +39,7 @@ public class IsoIecPure97SystemTest extends AbstractIsoIec7064Test {
      */
     @BeforeEach
     protected void setUp() {
-        routine = IsoIecPure97System.getInstance();
-        routin2 = IsoIecPolynomial97System.getInstance();
+        routine = Modulus97CheckDigit.getInstance();
         valid = new String[] {"01", "001", "0001"
             , MIN, MAX
             , "999999999999999999950"
@@ -57,6 +56,13 @@ public class IsoIecPure97SystemTest extends AbstractIsoIec7064Test {
             , "057110600179"
             , "059139900125"
             , "11200000100030"
+            // contains ALPHANUMERICs
+            , "0401100012345ABCXYZ86" // from https://de.wikipedia.org/wiki/Leitweg-ID
+            , "510007547061BE62" , "1904300234573201AT61" // IBAN : BE62510007547061 AT611904300234573201
+            , "54930084UKLVMY22DS16" // LEI G.E. Financing GmbH
+            , "213800WSGIIZCXF1P572" // Jaguar Land Rover Ltd
+            , "M07J9MTYHFCSVRBV2631" // RWE AG (old Style, before 2012.Nov.30)
+            , "529900CLVK38HUKPKF71" // SWKBank
             };
         invalid = new String[] {"08940", "089X", "X3"};
     }
