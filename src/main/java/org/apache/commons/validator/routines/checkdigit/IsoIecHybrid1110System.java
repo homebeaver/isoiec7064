@@ -55,7 +55,7 @@ public class IsoIecHybrid1110System extends IsoIec7064HybridSystem implements Is
      * M+1 is the parameter of the ctor.
      * </p>
      */
-    private IsoIecHybrid1110System() {
+    IsoIecHybrid1110System() {
         super(NUMERIC.length() + 1);
     }
 

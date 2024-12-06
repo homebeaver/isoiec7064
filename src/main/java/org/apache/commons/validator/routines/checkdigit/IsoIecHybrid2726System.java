@@ -45,7 +45,7 @@ public class IsoIecHybrid2726System extends IsoIec7064HybridSystem implements Is
     /**
      * Constructs a modulus Check Digit routine.
      */
-    private IsoIecHybrid2726System() {
+    IsoIecHybrid2726System() {
         super(ALPHABETIC.length() + 1);
     }
 

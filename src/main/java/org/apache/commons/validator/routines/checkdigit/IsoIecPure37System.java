@@ -41,7 +41,7 @@ public class IsoIecPure37System extends IsoIec7064PureSystem implements IsoIecCo
     public static CheckDigit getInstance() {
         return INSTANCE;
     }
-    private IsoIecPure37System() {
+    IsoIecPure37System() {
         super(MODULUS_37, 1);
     }
 

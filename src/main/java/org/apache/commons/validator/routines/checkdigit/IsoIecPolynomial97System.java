@@ -41,7 +41,7 @@ public class IsoIecPolynomial97System extends IsoIec7064PurePolynomialSystem imp
     public static CheckDigit getInstance() {
         return INSTANCE;
     }
-    private IsoIecPolynomial97System() {
+    IsoIecPolynomial97System() {
         super(MODULUS_97, 2);
     }
 

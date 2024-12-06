@@ -41,7 +41,7 @@ public class IsoIecPure11System extends IsoIec7064PureSystem implements IsoIecCo
     public static CheckDigit getInstance() {
         return INSTANCE;
     }
-    private IsoIecPure11System() {
+    IsoIecPure11System() {
         super(MODULUS_11, 1);
     }
 

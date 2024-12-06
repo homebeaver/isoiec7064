@@ -42,7 +42,7 @@ public class IsoIecPure661System extends IsoIec7064PureSystem implements IsoIecC
     public static CheckDigit getInstance() {
         return INSTANCE;
     }
-    private IsoIecPure661System() {
+    IsoIecPure661System() {
         super(MODULUS_661, 2);
     }
 
