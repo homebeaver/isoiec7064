@@ -75,11 +75,11 @@ public abstract class IsoIec7064PureSystem extends ModulusCheckDigit {
         }
         try {
             if (code.length() < getCheckdigitLength()) {
-                throw new CheckDigitException("Invalid code, too short " + code);
+                throw new CheckDigitException(CheckDigitException.invalidCode(code, "too short"));
             }
             final int cd = toInt(code.substring(code.length() - getCheckdigitLength()));
             if (cd >= getModulus()) {
-                throw new CheckDigitException("Invalid code, check digit = " + cd);
+                throw new CheckDigitException(CheckDigitException.invalidCode(code, "check digit = " + cd));
             }
             final int cm = calculateModulus(code, true);
             return 1 == (cd + cm) % getModulus();
