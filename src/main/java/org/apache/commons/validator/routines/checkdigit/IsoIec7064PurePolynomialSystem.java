@@ -46,7 +46,7 @@ public abstract class IsoIec7064PurePolynomialSystem extends IsoIec7064PureSyste
             throw new CheckDigitException(CheckDigitException.MISSING_CODE);
         }
         final int m = getModulus();
-        int cp = calculatePolynomial(code, false);
+        int cp = calculateModulus(code, false);
         int r = (m - cp + 1) % m; // wie in super.calculate
         int checksum = r;
         if (checksum < 0) {
@@ -56,13 +56,14 @@ public abstract class IsoIec7064PurePolynomialSystem extends IsoIec7064PureSyste
         return toCheckDigit(checksum);
     }
     /**
-     * Calculate the modulus value for a code. 
-     * @param code The code to calculate the modulus for.
-     * @param includesCheckDigit Whether the code includes the Check Digit or not.
-     * @return the modulus value for the code
-     * @throws CheckDigitException if an error occurs calculating the modulus for the specified code
+     * {@inheritDoc}
+     * <p>
+     * The polynomial method for the pure ISO/IEC 7064 Systems is computed
+     * by multiplying the value for each Character in the string by its weight.
+     * The weights can be precalculated.
+     * </p>
      */
-    protected int calculatePolynomial(final String code, final boolean includesCheckDigit) throws CheckDigitException {
+    protected int calculateModulus(final String code, final boolean includesCheckDigit) throws CheckDigitException {
         int p = 0;
         int l = includesCheckDigit ? code.length() - getCheckdigitLength() : code.length();
         for (int i = 0; i < l; i++) {
