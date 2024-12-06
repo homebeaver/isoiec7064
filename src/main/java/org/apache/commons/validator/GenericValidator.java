@@ -17,9 +17,9 @@
 package org.apache.commons.validator;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+//import java.text.DateFormat;
+//import java.text.SimpleDateFormat;
+//import java.util.Locale;
 import java.util.regex.Pattern;
 
 //import org.apache.commons.validator.routines.CreditCardValidator;
