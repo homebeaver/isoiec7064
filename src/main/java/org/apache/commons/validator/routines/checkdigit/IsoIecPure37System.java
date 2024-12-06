@@ -58,7 +58,7 @@ public class IsoIecPure37System extends IsoIec7064PureSystem implements IsoIecCo
     @Override
     protected int toInt(final char character, final int leftPos, final int rightPos) throws CheckDigitException {
         if (character == '*' ) {
-            throw new CheckDigitException("Invalid Character[" + leftPos + "] = '" + character + "'");
+            throw new CheckDigitException(CheckDigitException.invalidCharacter(character, leftPos));
         }
         return super.toInt(character, leftPos, rightPos);
     }

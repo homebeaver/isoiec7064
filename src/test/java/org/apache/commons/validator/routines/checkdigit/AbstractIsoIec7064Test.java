@@ -78,7 +78,7 @@ public abstract class AbstractIsoIec7064Test {
     protected String zeroSum = "0000000000";
 
     /** Prefix for error messages */
-    protected String missingMessage = "Code is missing";
+    protected String missingMessage = CheckDigitException.MISSING_CODE;
 
     /**
      * Returns the check digit (i.e. last character) for a code.
@@ -175,7 +175,7 @@ public abstract class AbstractIsoIec7064Test {
                 final String expected = checkDigit(code);
                 final String codeWithNoCheckDigit = removeCheckDigit(code);
                 if (codeWithNoCheckDigit == null) {
-                    throw new CheckDigitException("Invalid Code=[" + code + "]");
+                    throw new CheckDigitException(CheckDigitException.invalidCode(code));
                 }
                 final String actual = routine.calculate(codeWithNoCheckDigit);
                 // If exception not thrown, check that the digit is incorrect instead
@@ -194,7 +194,7 @@ public abstract class AbstractIsoIec7064Test {
                 // Invalid ISBN Length ...
                 // Invalid Character[ ...
                 // Are there any others?
-                assertTrue(e.getMessage().startsWith("Invalid "), "Invalid Character[" + i + "]=" + e.getMessage());
+                assertTrue(e.getMessage().startsWith(CheckDigitException.START_WITH_INVALID), "Invalid Character[" + i + "]=" + e.getMessage());
 // WAS                assertTrue("Invalid Character[" +i +"]=" +  e.getMessage(), e.getMessage().startsWith("Invalid Character["));
             }
         }

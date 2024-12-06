@@ -140,7 +140,7 @@ public abstract class IsoIec7064HybridSystem extends ModulusCheckDigit {
     protected int toInt(final char character, final int leftPos, final int rightPos) throws CheckDigitException {
         int pos = getCharacterSet().indexOf(character);
         if (pos == -1 ) {
-            throw new CheckDigitException("Invalid Character[" + leftPos + "] = '" + character + "'");
+            throw new CheckDigitException(CheckDigitException.invalidCharacter(character, leftPos));
         }
         return pos;
     }

@@ -134,18 +134,18 @@ public abstract class IsoIec7064PureSystem extends ModulusCheckDigit {
         if (character.length() == 1) {
             int pos = getCharacterSet().indexOf(character);
             if (pos == -1 ) {
-                throw new CheckDigitException("Invalid Character = '" + character + "'");
+                throw new CheckDigitException(CheckDigitException.invalidCharacter(character));
             }
             return pos;
         }
         // checkdigitLength == 2
         int p0 = getCharacterSet().indexOf(character.charAt(0));
         if (p0 == -1 ) {
-            throw new CheckDigitException("Invalid Character = '" + character + "'");
+            throw new CheckDigitException(CheckDigitException.invalidCharacter(character));
         }
         int p1 = getCharacterSet().indexOf(character.charAt(1));
         if (p1 == -1 ) {
-            throw new CheckDigitException("Invalid Character = '" + character + "'");
+            throw new CheckDigitException(CheckDigitException.invalidCharacter(character));
         }
         return p0 * getRadix() + p1;
     }
@@ -158,7 +158,7 @@ public abstract class IsoIec7064PureSystem extends ModulusCheckDigit {
     @Override
     protected int toInt(final char character, final int leftPos, final int rightPos) throws CheckDigitException {
         if (getCharacterSet().indexOf(character) == -1) {
-            throw new CheckDigitException("Invalid Character[" + leftPos + "] = '" + character + "'");
+            throw new CheckDigitException(CheckDigitException.invalidCharacter(character, leftPos));
         }
         return Character.getNumericValue(character);
     }

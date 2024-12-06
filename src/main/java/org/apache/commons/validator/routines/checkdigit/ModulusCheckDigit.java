@@ -112,7 +112,7 @@ public abstract class ModulusCheckDigit extends AbstractCheckDigit implements Se
             total += weightedValue(charValue, leftPos, rightPos);
         }
         if (total == 0) {
-            throw new CheckDigitException("Invalid code, sum is zero");
+            throw new CheckDigitException(CheckDigitException.ZERO_SUM);
         }
         return total % modulus;
     }
@@ -182,7 +182,7 @@ public abstract class ModulusCheckDigit extends AbstractCheckDigit implements Se
         if (Character.isDigit(character)) {
             return Character.getNumericValue(character);
         }
-        throw new CheckDigitException("Invalid Character[" + leftPos + "] = '" + character + "'");
+        throw new CheckDigitException(CheckDigitException.invalidCharacter(character, leftPos));
     }
 
     /**

@@ -47,6 +47,16 @@ public class CheckDigitException extends Exception {
         return START_WITH_INVALID + "code \"" + code + "\"" + (detail == null ? "." : ", "+detail);
     }
 
+    public static final String invalidCharacter(final String character) {
+        return START_WITH_INVALID + "Character \"" + character + "\"";
+    }
+    public static final String invalidCharacter(final char character) {
+        return START_WITH_INVALID + "Character '" + character + "'";
+    }
+    public static final String invalidCharacter(final char character, final int atPos) {
+        return START_WITH_INVALID + "Character '" + character + "' at pos " + atPos;
+    }
+
     /**
      * Constructs an Exception with no message.
      */

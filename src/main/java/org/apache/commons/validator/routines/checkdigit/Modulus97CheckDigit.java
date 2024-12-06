@@ -87,7 +87,7 @@ public class Modulus97CheckDigit extends IsoIec7064PureSystem implements IsoIecC
     @Override
     protected int toInt(final char character, final int leftPos, final int rightPos) throws CheckDigitException {
         if (ALPHANUMERIC.indexOf(character) == -1) {
-            throw new CheckDigitException("Invalid Character[" + leftPos + "] = '" + character + "'");
+            throw new CheckDigitException(CheckDigitException.invalidCharacter(character, leftPos));
         }
         return Character.getNumericValue(character);
     }
