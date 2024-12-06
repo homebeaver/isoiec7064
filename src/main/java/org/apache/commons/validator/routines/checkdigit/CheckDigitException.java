@@ -44,7 +44,7 @@ public class CheckDigitException extends Exception {
         return invalidCode(code, null);
     }
     public static final String invalidCode(final String code, final String detail) {
-        return START_WITH_INVALID + "code \"" + code + "\"" + (detail == null ? "." : ", "+detail);
+        return START_WITH_INVALID + "code \"" + code + "\"" + (detail == null ? "." : ", " + detail);
     }
 
     public static final String invalidCharacter(final String character) {
