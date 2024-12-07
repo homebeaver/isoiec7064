@@ -43,7 +43,7 @@ public class LeitwegValidatorTest {
 
     @Test
     public void testValid() {
-        for(String f : validLeitwegFormat) {
+        for (String f : validLeitwegFormat) {
             System.out.println("   Testing Valid Code=[" + f + "]");
             assertTrue(VALIDATOR.isValid(f), f);
         }
@@ -51,7 +51,7 @@ public class LeitwegValidatorTest {
 
     @Test
     public void testInValid() {
-        for(String f : invalidLeitwegFormat) {
+        for (String f : invalidLeitwegFormat) {
             assertFalse(VALIDATOR.isValid(f), f);
         }
     }
