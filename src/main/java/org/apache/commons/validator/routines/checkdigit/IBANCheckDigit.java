@@ -77,12 +77,6 @@ public final class IBANCheckDigit extends Modulus97CheckDigit {
         }
         code = code.substring(4) + code.substring(0, 2); // CHECKSTYLE IGNORE MagicNumber
         return super.calculate(code);
-//        final int m = getModulus();
-//        final int cm = calculateModulus(code, false);
-//        // now compute what checksum will be congruent to 1 mod M
-//        int checksum = (m - cm + 1) % m;
-//        // check digits can be from 02-98 (00 and 01 are not possible)
-//        return toCheckDigit(checksum > 1 ? checksum : checksum + m);
     }
 
     /**
@@ -101,12 +95,18 @@ public final class IBANCheckDigit extends Modulus97CheckDigit {
 //        if ("00".equals(check) || "01".equals(check) || "99".equals(check)) {
 //            return false;
 //        }
+//        final String c = code.substring(4) + code.substring(0, 4);  // CHECKSTYLE IGNORE MagicNumber
 //        try {
-//            String cd = calculate(code);
-//            return cd.equals(check);
-//        } catch (final CheckDigitException ex) {
+//            final int cm = calculateModulus(c, true);
+//            final int cd = Integer.parseInt(check);
+//            return 1 == (cd + cm) % getModulus();
+//        } catch (final NumberFormatException ex) {
+//            System.out.println(code + " check digit=" + check + " ==> " + ex);
+//            return false;
+//        } catch (CheckDigitException e) {
 //            return false;
 //        }
+        // oder ganz einfach:
         return super.isValid(code.substring(4) + code.substring(0, 4)); // CHECKSTYLE IGNORE MagicNumber
     }
 
