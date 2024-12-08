@@ -21,9 +21,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * LeitwegValidator Test.
+ */
 public class LeitwegValidatorTest {
 
     private final String[] validLeitwegFormat = new String[] {
+        "05916-31001-97",         // Stadt Herne (PZ 97 und nicht 00)
+        "05111-12012-98",         // Rechenzentrum der Finanzverwaltung NRW (PZ 98 und nicht 01)
         "992-90009-96",           // Deutsche Bahn AG
         "051700052052-31001-35",  // Xanten, Stadt
         "053340002002-33004-23",  // Aachener Parkhaus GmbH
@@ -35,7 +40,7 @@ public class LeitwegValidatorTest {
     };
 
     private final String[] invalidLeitwegFormat = new String[] {
-        "9992",                   // "99-92" without -
+        "9992",                   // "99-92" without '-'
         "00-290009-64",           // invalid region "00"
     };
 

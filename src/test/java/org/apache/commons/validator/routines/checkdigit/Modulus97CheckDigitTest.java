@@ -19,7 +19,8 @@ package org.apache.commons.validator.routines.checkdigit;
 import org.junit.jupiter.api.BeforeEach;
 
 /**
- * Test ISO/IEC 7064, MOD 97-10 pure recursive/iterative and polynomial routines.
+ * Test MOD 97-10 which applies to alphanumeric Strings.
+ * Check digits can be from 02 to 98 (00 and 01 are not possible)
  *
  * @author EUG https://github.com/homebeaver
  * @since 1.10.0
@@ -40,7 +41,7 @@ public class Modulus97CheckDigitTest extends AbstractIsoIec7064Test {
     @BeforeEach
     protected void setUp() {
         routine = Modulus97CheckDigit.getInstance();
-        valid = new String[] {"01", "001", "0001"
+        valid = new String[] {"98", "098", "0098" // empty or zero string with check digit
             , MIN, MAX
             , "999999999999999999950"
             , "9999999999999999999976"
@@ -56,15 +57,21 @@ public class Modulus97CheckDigitTest extends AbstractIsoIec7064Test {
             , "057110600179"
             , "059139900125"
             , "11200000100030"
+            , "059163100197"  // Stadt Herne (PZ 97 und nicht 00)
+            , "051111201298"  // Rechenzentrum der Finanzverwaltung NRW (PZ 98 und nicht 01)
             // contains ALPHANUMERICs
             , "0401100012345ABCXYZ86" // from https://de.wikipedia.org/wiki/Leitweg-ID
             , "510007547061BE62" , "1904300234573201AT61" // IBAN : BE62510007547061 AT611904300234573201
+            , "NBIQ850123456789012IQ98" // IBAN : IQ98NBIQ850123456789012
             , "54930084UKLVMY22DS16" // LEI G.E. Financing GmbH
             , "213800WSGIIZCXF1P572" // Jaguar Land Rover Ltd
             , "M07J9MTYHFCSVRBV2631" // RWE AG (old Style, before 2012.Nov.30)
             , "529900CLVK38HUKPKF71" // SWKBank
             };
-        invalid = new String[] {"08940", "089X", "X3"};
+        invalid = new String[] {"01", "001", "0001"
+            , "059163100100"  // Leitweg ohne '-' : Stadt Herne mit falscher PZ
+            , "NBIQ850123456789012IQ01" // IBAN so mit falscher PZ
+            , "08940", "089X", "X3"};
     }
 
 }

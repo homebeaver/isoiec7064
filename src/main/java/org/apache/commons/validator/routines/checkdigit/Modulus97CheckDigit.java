@@ -19,9 +19,11 @@ package org.apache.commons.validator.routines.checkdigit;
 /**
  * MOD 97-10 module similar to ISO/IEC 7064, MOD 97-10.
  * In difference to the standard this module applies to alphanumeric Strings.
+ * Check digits can be from 02 to 98 (00 and 01 are not possible)
+
  * <p>
  * See <a href="https://de.wikipedia.org/wiki/ISO/IEC_7064">Wikipedia - ISO/IEC_7064 (de)</a>
- * for more details.
+ * for more details on ISO/IEC 7064, MOD 97-10
  * </p>
  *
  * <p>
@@ -60,6 +62,19 @@ public class Modulus97CheckDigit extends IsoIec7064PureSystem implements IsoIecC
     }
 
     @Override
+    public String calculate(final String code) throws CheckDigitException {
+        if (code == null) {
+            throw new CheckDigitException(CheckDigitException.MISSING_CODE);
+        }
+        final int m = getModulus();
+        final int cm = calculateModulus(code, false);
+        // now compute what checksum will be congruent to 1 mod M
+        int checksum = (m - cm + 1) % m;
+        // check digits can be from 02-98 (00 and 01 are not possible)
+        return toCheckDigit(checksum > 1 ? checksum : checksum + m);
+    }
+
+    @Override
     protected int calculateModulus(final String code, final boolean includesCheckDigit) throws CheckDigitException {
         final int m = getModulus();
         final int r = getRadix();
@@ -82,6 +97,20 @@ public class Modulus97CheckDigit extends IsoIec7064PureSystem implements IsoIecC
             p = p * r % m;
         }
         return p;
+    }
+    @Override
+    public boolean isValid(final String code) {
+        if (code == null) {
+            return false;
+        }
+        try {
+            if (code.length() < getCheckdigitLength()) {
+                throw new CheckDigitException(CheckDigitException.invalidCode(code, "too short"));
+            }
+            return code.endsWith(INSTANCE.calculate(code.substring(0, code.length() - getCheckdigitLength())));
+        } catch (final CheckDigitException ex) {
+            return false;
+        }
     }
 
     @Override
