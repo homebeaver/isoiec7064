@@ -159,6 +159,7 @@ public abstract class AbstractCheckDigitTest {
         if (log.isDebugEnabled()) {
             log.debug("testCalculateInvalid() for " + routine.getClass().getName());
         }
+        System.out.println("EUG ???" + " routine=[" + routine + "]");
 
         // test invalid code values
         for (int i = 0; i < invalid.length; i++) {
