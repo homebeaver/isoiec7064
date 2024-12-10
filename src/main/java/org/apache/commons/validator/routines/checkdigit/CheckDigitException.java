@@ -65,6 +65,12 @@ public class CheckDigitException extends Exception {
     public static final String invalidCharacter(final char character) {
         return START_WITH_INVALID + "Character '" + character + "'";
     }
+    /**
+     * Convenient message text "Invalid Character [character] at pos [atPos]"
+     * @param character the invalid character
+     * @param atPos the position of the character in code
+     * @return the message text
+     */
     public static final String invalidCharacter(final char character, final int atPos) {
         return START_WITH_INVALID + "Character '" + character + "' at pos " + atPos;
     }
