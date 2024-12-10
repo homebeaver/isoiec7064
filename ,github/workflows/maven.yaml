@@ -26,7 +26,8 @@ jobs:
         env:
           First_Name: Mona
 
-  publish:
+#  publish:
+  build:
     runs-on: ubuntu-latest
     environment: staging
 #    continue-on-error: ${{ matrix.experimental }}
