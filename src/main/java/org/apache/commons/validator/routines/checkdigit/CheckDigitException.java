@@ -40,6 +40,11 @@ public class CheckDigitException extends Exception {
      */
     public static final String ZERO_SUM = START_WITH_INVALID + "code, sum is zero";
 
+    /**
+     * Convenient message text "Invalid code [invalidCode]." with no additional information
+     * @param code the invalid code
+     * @return the message text
+     */
     public static final String invalidCode(final String code) {
         return invalidCode(code, null);
     }
