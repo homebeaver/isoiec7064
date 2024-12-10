@@ -46,8 +46,13 @@ jobs:
         distribution: 'adopt'
         cache: maven
     - name: Build with Maven
+# Available lifecycle phases are: validate, initialize, generate-sources, process-sources, generate-resources, 
+# process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, 
+# process-test-resources, test-compile, process-test-classes, test, prepare-package, package, 
+# pre-integration-test, integration-test, post-integration-test, verify, install, deploy, 
+# pre-clean, clean, post-clean, pre-site, site, post-site, site-deploy. 
 #      run: mvn -V --batch-mode package
-      run: mvn --errors --show-version --batch-mode --no-transfer-progress -Ddoclint=all
+      run: mvn -V --errors --show-version --batch-mode --no-transfer-progress -Ddoclint=all package
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
 #    - name: Update dependency graph
