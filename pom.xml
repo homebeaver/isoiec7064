@@ -103,6 +103,20 @@
           </execution>
         </executions>
       </plugin>
+
+<!-- see https://stackoverflow.com/questions/49441049/junit-5-does-not-execute-method-annotated-with-beforeeach -->
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.2</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.11.2</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
@@ -214,8 +228,8 @@ use simplify4u : -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <scope>test</scope>
       <version>5.11.2</version>
+      <scope>test</scope>
     </dependency>
 
   </dependencies>
