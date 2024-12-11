@@ -23,6 +23,9 @@ import org.junit.jupiter.api.BeforeEach;
  */
 public class VATidFICheckDigitTest extends AbstractCheckDigitTest {
 
+    public VATidFICheckDigitTest() {
+        routine = VATidFICheckDigit.getInstance();
+    }
     /**
      * Sets up routine & valid codes.
      */
