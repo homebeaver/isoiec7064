@@ -23,13 +23,6 @@ import org.junit.jupiter.api.BeforeEach;
  */
 public class VATidFICheckDigitTest extends AbstractCheckDigitTest {
 
-    public VATidFICheckDigitTest() {
-        routine = VATidFICheckDigit.getInstance();
-        valid = new String[]
-                { "13669598"
-                , "01745928", "1745928"
-                };
-    }
     /**
      * Sets up routine & valid codes.
      */
