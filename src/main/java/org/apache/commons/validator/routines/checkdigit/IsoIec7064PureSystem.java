@@ -16,24 +16,28 @@
  */
 package org.apache.commons.validator.routines.checkdigit;
 
-/*
-die 5 subklassen Benennungen (mit rekursiven/iterativen Implementierung)
-
-   IsoIecPure11System : MOD 11-2 : eine Ziffer oder 'X'
-   IsoIecPure37System : MOD 37-2 : ein alphanumerisches Zeichen oder '*'
-   IsoIecPure97System : MOD 97-10: zwei Ziffern ==> toCheckDigit() , toInt() muss man also überschreiben
-   IsoIecPure661System : MOD 661-26: zwei Buchstaben
-   IsoIecPure1271System : MOD 1271_36: zwei alphanumerische Zeichen
-
-MOD 11-2 und MOD 37-2 Implementierungen berechnen die pz auch für {"", "0", "00", ... }, die Norm konform "1" ergibt.
-Nicht aber für null!
-MOD 97-10 und MOD 1271_36 berechnen für {"", "0", "00", ... } "01" als pz.
-Auch in MOD 661-26 sind die zwei (int) pz 0 und 1, was als Buchstaben "AB" liefert.
-
-IsoIec7064PurePolynomialSystem ist eine eigene abstrakte Klasse für die polynomiale Implementierung,
-daraus sind dann die endglültigen Klassen abgeleitet
-
-*/
+/**
+ * Abstract implementation for five check digit calculation/validation defined in the ISO/IEC 7064 standard.
+ * <ul>
+ *   <li>ISO/IEC 7064, MOD 11-2 applies to numeric strings ({@link IsoIecPure11System})</li>
+ *   <li>ISO/IEC 7064, MOD 37-2 applies to alphanumeric strings ({@link IsoIecPure37System})</li>
+ *   <li>ISO/IEC 7064, MOD 97-10 applies to numeric strings ({@link IsoIecPure97System})</li>
+ *   <li>ISO/IEC 7064, MOD 661-26 applies to alphabetic strings ({@link IsoIecPure661System})</li>
+ *   <li>ISO/IEC 7064, MOD 1271_36 applies to alphanumeric strings ({@link IsoIecPure1271System})</li>
+ * </ul>
+ * <p>
+ * <b>Pure</b> system algorithms use a single modulus value {@link #getModulus()} and a radix {@link #getRadix()},
+ *  f.i. the modulus for MOD 11-2 is 11, the radix is 2.
+ * There is also an alternative polynomial implementation for the pure systems,
+ *  see {@link IsoIec7064PurePolynomialSystem} and subclasses.
+ * </p>
+ * <p>
+ * The standard also defines hybrid systems with two modulus values (see {@link IsoIec7064HybridSystem}).
+ * </p>
+ *
+ * @author EUG https://github.com/homebeaver
+ * @since 1.10.0
+ */
 public abstract class IsoIec7064PureSystem extends ModulusCheckDigit {
 
     private static final long serialVersionUID = 8956070914814659350L;
@@ -64,6 +68,10 @@ public abstract class IsoIec7064PureSystem extends ModulusCheckDigit {
         this.checkdigitLength = checkdigitLength;
     }
 
+    /**
+     * Returns the lentgth of the check digit for the system
+     * @return checkdigitLength can be one ore two chars
+     */
     public int getCheckdigitLength() {
         return checkdigitLength;
     }

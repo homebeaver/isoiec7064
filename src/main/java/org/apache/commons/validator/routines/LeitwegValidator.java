@@ -106,6 +106,10 @@ public class LeitwegValidator {
         this.formatValidator = DEFAULT_FORMAT;
     }
 
+    /**
+     * Retuens the RegexValidator for the format
+     * @return formatValidator
+     */
     public RegexValidator getFormatValidator() {
         return formatValidator.validator;
     }

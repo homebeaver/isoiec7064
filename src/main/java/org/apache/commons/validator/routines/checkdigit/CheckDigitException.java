@@ -59,9 +59,19 @@ public class CheckDigitException extends Exception {
         return START_WITH_INVALID + "code \"" + code + "\"" + (detail == null ? "." : ", " + detail);
     }
 
+    /**
+     * Convenient message text "Invalid Character [character]"
+     * @param character the invalid character string
+     * @return the message text
+     */
     public static final String invalidCharacter(final String character) {
         return START_WITH_INVALID + "Character \"" + character + "\"";
     }
+    /**
+     * Convenient message text "Invalid Character [character]" without pos
+     * @param character the invalid character
+     * @return the message text
+     */
     public static final String invalidCharacter(final char character) {
         return START_WITH_INVALID + "Character '" + character + "'";
     }
