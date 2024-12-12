@@ -109,7 +109,8 @@ public class Modulus97CheckDigit extends IsoIec7064PureSystem implements IsoIecC
                 throw new CheckDigitException(CheckDigitException.invalidCode(code, "too short"));
             }
 //            check = code.substring(code.length() - getCheckdigitLength());
-//            final int cd = Integer.parseInt("0"+check);
+//         // without the leading "0" the following would be valid "+4"
+//            final int cd = Integer.parseInt("0" + check);
 //            if (cd==0 || cd==1 || cd==99) {
 //                return false;
 //            }
