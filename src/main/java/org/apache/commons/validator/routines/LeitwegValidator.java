@@ -45,7 +45,25 @@ import org.apache.commons.validator.routines.checkdigit.Modulus97CheckDigit;
 public class LeitwegValidator {
 
     private static final char MINUS = '\u002D'; // '-' Separator
-
+/*
+• 01 DE-SH Schleswig-Holstein 
+• 02 DE-HH Hamburg 
+• 03 DE-NI Niedersachsen 
+• 04 DE-HB Bremen 
+• 05 DE-NW Nordrhein-Westfalen 
+• 06 DE-HE Hessen 
+• 07 DE-RP Rheinland-Pfalz 
+• 08 DE-BW Baden-Württemberg 
+• 09 DE-BY Bayern 
+• 10 DE-SL Saarland 
+• 11 DE-BE Berlin 
+• 12 DE-BB Brandenburg 
+• 13 DE-MV Mecklenburg-Vorpommern 
+• 14 DE-SN Sachsen 
+• 15 DE-ST Sachsen-Anhalt 
+• 16 DE-TH Thüringen 
+• 99 DE Bund
+ */
     private static final String STARTWITHREGION = "^(01|02|03|04|05|06|07|08|09|10|11|12|13|14|16|99)"; 
     private static final String OPTIONAL_DETAIL = MINUS + "([A-Za-z0-9]{1,30})?"; // optional alphanumeric detail
     private static final String MD_CHECK_DIGITS = MINUS + "(\\d{2})$";            // two mandatory check digits
