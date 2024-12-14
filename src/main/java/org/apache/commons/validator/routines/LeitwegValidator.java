@@ -45,7 +45,7 @@ import org.apache.commons.validator.routines.checkdigit.Modulus97CheckDigit;
 public class LeitwegValidator {
 
     private static final char MINUS = '\u002D'; // '-' Separator
-/*
+/* first two digits designate the individual German state, here with ISO 3166-2 country subdivision code
 • 01 DE-SH Schleswig-Holstein 
 • 02 DE-HH Hamburg 
 • 03 DE-NI Niedersachsen 
