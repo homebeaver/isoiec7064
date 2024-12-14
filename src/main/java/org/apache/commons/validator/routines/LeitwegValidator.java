@@ -16,8 +16,6 @@
  */
 package org.apache.commons.validator.routines;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.commons.validator.routines.checkdigit.Modulus97CheckDigit;
 
 /**
@@ -46,16 +44,21 @@ import org.apache.commons.validator.routines.checkdigit.Modulus97CheckDigit;
  */
 public class LeitwegValidator {
 
-    private static final Log LOG = LogFactory.getLog(LeitwegValidator.class);
-
-    private final Validator formatValidator;
-
     private static final char MINUS = '\u002D'; // '-' Separator
 
-    private static final Validator DEFAULT_FORMAT =
-     new Validator("^(01|02|03|04|05|06|07|08|09|10|11|12|13|14|16|99)((\\d)((\\d{2})(\\d{3}|\\d{4}|\\d{7})?)?)?"
-       + "(-([A-Za-z0-9]{1,30}))?" // optional alphanumeric detail
-       + "-(\\d{2})$");            // two mandatory check digits
+    private static final String STARTWITHREGION = "^(01|02|03|04|05|06|07|08|09|10|11|12|13|14|16|99)"; 
+    private static final String OPTIONAL_DETAIL = MINUS + "([A-Za-z0-9]{1,30})?"; // optional alphanumeric detail
+    private static final String MD_CHECK_DIGITS = MINUS + "(\\d{2})$";            // two mandatory check digits
+    // Regierungsbezirk (\\d) + Landkreis (\\d{2}) + Gemeinde (3, 4 oder 7 Stellen)
+    private static final String FORMAT1 = STARTWITHREGION + "(\\d)?(\\d{2})?"
+        + OPTIONAL_DETAIL + MD_CHECK_DIGITS;
+    private static final String FORMAT2 = STARTWITHREGION + "(\\d\\d{2}\\d{7})"
+        + OPTIONAL_DETAIL + MD_CHECK_DIGITS;
+    private static final String FORMAT3 = STARTWITHREGION + "(\\d\\d{2}\\d{4})"
+        + OPTIONAL_DETAIL + MD_CHECK_DIGITS;
+    private static final String FORMAT4 = STARTWITHREGION + "(\\d\\d{2}\\d{3})"
+        + OPTIONAL_DETAIL + MD_CHECK_DIGITS;
+    private static final String[] FORMAT = new String[] {FORMAT1, FORMAT2, FORMAT3, FORMAT4};
 
     /*
      * in theory the shortest Leitweg-ID has a minimal general part and check digits
@@ -71,24 +74,10 @@ public class LeitwegValidator {
      */
     private static final int MAX_CODE_LEN = 44;
 
-    /**
-     * The validation class
-     */
-    public static class Validator {
-        final RegexValidator validator;
-
-        /**
-         * Creates the format validator
-         *
-         * @param format the regex to use to check the format
-         */
-        public Validator(String format) {
-            this.validator = new RegexValidator(format);
-        }
-    }
+    private static final CodeValidator VALIDATOR = new CodeValidator(new RegexValidator(FORMAT), MIN_CODE_LEN, MAX_CODE_LEN, Modulus97CheckDigit.getInstance());
 
     /** The singleton instance which uses the default formats */
-    public static final LeitwegValidator DEFAULT_LEITWEG_VALIDATOR = new LeitwegValidator();
+    private static final LeitwegValidator DEFAULT_LEITWEG_VALIDATOR = new LeitwegValidator();
 
     /**
      * Return a singleton instance of the validator using the default formats
@@ -100,45 +89,13 @@ public class LeitwegValidator {
     }
 
     /**
-     * Create a default format validator.
-     */
-    public LeitwegValidator() {
-        this.formatValidator = DEFAULT_FORMAT;
-    }
-
-    /**
-     * Retuens the RegexValidator for the format
-     * @return formatValidator
-     */
-    public RegexValidator getFormatValidator() {
-        return formatValidator.validator;
-    }
-
-    /**
      * Validate a Leitweg-ID
      *
      * @param id The value validation is being performed on
      * @return <code>true</code> if the value is valid
      */
     public boolean isValid(String id) {
-
-        id = id.trim();
-        if (id == null || id.length() > MAX_CODE_LEN || id.length() < MIN_CODE_LEN) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("format length error for " + id);
-            }
-            return false;
-        }
-
-        // format check:
-        // der RegexValidator kann mehrere pattern prüfen!!!
-        if (!formatValidator.validator.isValid(id)) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("format " + id + " is NOT valid.");
-            }
-            return false;
-        }
-        return Modulus97CheckDigit.getInstance().isValid(removeMinus(id));
+        return VALIDATOR.isValid(id);
     }
 
     private String removeMinus(String id) {

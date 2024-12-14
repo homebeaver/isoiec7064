@@ -16,8 +16,6 @@
  */
 package org.apache.commons.validator.routines.checkdigit;
 
-//import org.apache.commons.validator.routines.CodeValidator;
-
 /**
  * <strong>Check Digit</strong> calculation and validation.
  * <p>
@@ -40,7 +38,7 @@ package org.apache.commons.validator.routines.checkdigit;
  * <a href="package-summary.html">Package Summary</a> for a full
  * list of implementations provided within Commons Validator.
  *
-// * @see org.apache.commons.validator.routines.CodeValidator
+ * @see org.apache.commons.validator.routines.CodeValidator
  * @since 1.4
  */
 public interface CheckDigit {
