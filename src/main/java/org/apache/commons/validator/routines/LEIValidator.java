@@ -39,35 +39,18 @@ import org.apache.commons.validator.routines.checkdigit.Modulus97CheckDigit;
  */
 public class LEIValidator {
 
-    private final Validator formatValidator;
+    private static final String[] FORMAT = new String[]
+        { "^(\\d{4})([A-Z0-9]{14})(\\d{2})$" // (LOU)(two reserved + LEI)(two mandatory check digits)
+        , "^([A-Z0-9]{18})(\\d{2})$"         // old Style
+        };
 
-    private static final Validator DEFAULT_FORMAT =
-     new Validator( new String[]
-       { "^(\\d{4})([A-Z0-9]{14})(\\d{2})$" // (LOU)(two reserved + LEI)(two mandatory check digits)
-       , "^([A-Z0-9]{18})(\\d{2})$"         // old Style
-     });
+    private static final int CODE_LEN = 20;
 
-    private static final int MIN_CODE_LEN = 20;
-    private static final int MAX_CODE_LEN = 20;
-
-    /**
-     * The validation class
-     */
-    public static class Validator {
-        final RegexValidator validator;
-
-        /**
-         * Creates the format validator
-         *
-         * @param formats the regex's to use to check the format
-         */
-        public Validator(String[] formats) {
-            this.validator = new RegexValidator(formats);
-        }
-    }
+    private static final CodeValidator VALIDATOR =
+        new CodeValidator(new RegexValidator(FORMAT), CODE_LEN, Modulus97CheckDigit.getInstance());
 
     /** The singleton instance which uses the default formats */
-    public static final LEIValidator DEFAULT_LEI_VALIDATOR = new LEIValidator();
+    private static final LEIValidator DEFAULT_LEI_VALIDATOR = new LEIValidator();
 
     /**
      * Return a singleton instance of the validator using the default formats
@@ -79,31 +62,13 @@ public class LEIValidator {
     }
 
     /**
-     * Create a default format validator.
-     */
-    public LEIValidator() {
-        this.formatValidator = DEFAULT_FORMAT;
-    }
-
-    /**
      * Validate a LEI
      *
      * @param id The value validation is being performed on
      * @return <code>true</code> if the value is valid
      */
     public boolean isValid(String id) {
-
-        id = id.trim();
-        if (id == null || id.length() > MAX_CODE_LEN || id.length() < MIN_CODE_LEN) {
-            return false;
-        }
-
-        // format check:
-        if (!formatValidator.validator.isValid(id)) {
-            return false;
-        }
-
-        return Modulus97CheckDigit.getInstance().isValid(id);
+        return VALIDATOR.isValid(id);
     }
 
 }
