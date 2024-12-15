@@ -27,8 +27,8 @@ jobs:
     env:
       Greeting: Hello
     steps:
-      - name: "Say Hello Mona it's Monday"
-        run: echo "$MY_VARIABLE_NAME" "$First_Name" "${{ MY_VARIABLE_NAME }}" "${{ github.event.name }}"
+      - name: ${{ vars.MY_VARIABLE_NAME }}
+        run: echo "$MY_VARIABLE_NAME" "$First_Name" "${{ github.event.name }}"
         env:
           First_Name: Mona
 
