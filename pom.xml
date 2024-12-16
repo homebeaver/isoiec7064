@@ -28,7 +28,7 @@
  -->
   <groupId>io.github.homebeaver</groupId> 
   <artifactId>isoiec7064</artifactId>
-  <version>1.10.1</version>
+  <version>1.10.2</version>
   <packaging>jar</packaging>
 
   <name>IsoIec7064</name>
@@ -132,26 +132,22 @@
         </executions>
       </plugin>
 
-<!-- see https://maven.apache.org/plugins/maven-gpg-plugin/usage.html
+<!-- see https://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
         <version>3.2.7</version>
         <executions>
           <execution>
-            <id>sign-artifacts</id>
             <phase>verify</phase>
             <goals>
               <goal>sign</goal>
             </goals>
-            <configuration>
-              <keyname>sign-key-id</keyname>
-              <passphraseServerId>sign-key-id</passphraseServerId>
-            </configuration>
           </execution>
         </executions>
       </plugin>
-use simplify4u : -->
+<!-- or use simplify4u : https://www.simplify4u.org/sign-maven-plugin/
+Key configuration can be provided by environment variables: SIGN_KEY, SIGN_KEY_ID, SIGN_KEY_PASS
       <plugin>
         <groupId>org.simplify4u.plugins</groupId>
         <artifactId>sign-maven-plugin</artifactId>
@@ -161,13 +157,10 @@ use simplify4u : -->
                 <goals>
                     <goal>sign</goal>
                 </goals>
-                <configuration>
-                    <!-- the same id as in settings.xml -->
-                    <serverId>sign-key-id</serverId>
-                </configuration>
             </execution>
         </executions>
       </plugin>
+ -->
 
       <plugin>
          <groupId>org.apache.maven.plugins</groupId>
