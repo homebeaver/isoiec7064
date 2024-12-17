@@ -37,6 +37,7 @@ public class LeitwegValidatorTest {
         "11-2000001000-30",       // ITDZ, Berlin
         "08125065-A9359-66",      // Stadt Neckarsulm
         "09564000-NUE0001-49",    // Flughafen Nürnberg GmbH siehe https://verzeichnis.leitweg-id.de/
+        "04011000-900X999-08",    // Test-Leitweg-ID https://www.e-rechnung.bremen.de/testen-11767
     };
 
     private final String[] invalidLeitwegFormat = new String[] {
