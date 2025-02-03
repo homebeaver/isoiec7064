@@ -18,6 +18,8 @@ package org.apache.commons.validator.routines.checkdigit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.validator.GenericTypeValidator;
+import org.apache.commons.validator.GenericValidator;
 
 /**
  * German Steuer-Identifikationsnummer (TIN – in short: IdNr.) is available since 2008,
@@ -30,13 +32,15 @@ import org.apache.commons.logging.LogFactory;
  *
  * @since 1.10.0
  */
-public final class TidDECheckDigit extends Modulus11TenCheckDigit {
+public final class TidDECheckDigit extends IsoIecHybrid1110System {
 
     private static final long serialVersionUID = 4222306963463322195L;
     private static final Log LOG = LogFactory.getLog(TidDECheckDigit.class);
 
     /** Singleton Check Digit instance */
     private static final TidDECheckDigit INSTANCE = new TidDECheckDigit();
+
+    static final int LEN = 11; // with Check Digit
 
     /**
      * Gets the singleton instance of this validator.
@@ -65,6 +69,17 @@ public final class TidDECheckDigit extends Modulus11TenCheckDigit {
      */
     @Override
     protected int calculateModulus(final String code, final boolean includesCheckDigit) throws CheckDigitException {
+        // anders als ISO/IEC 7064, MOD 11,10 akzeptieren wir keine Leerstrings
+        if (GenericValidator.isBlankOrNull(code)) {
+            throw new CheckDigitException(CheckDigitException.MISSING_CODE);
+        }
+        int len = includesCheckDigit ? LEN : LEN - 1;
+        if (code.length() != len) {
+            throw new CheckDigitException(CheckDigitException.invalidCode(code, "length error"));
+        }
+        if (GenericTypeValidator.formatLong(code.substring(0, len -1)) == 0) {
+            throw new CheckDigitException(CheckDigitException.ZERO_SUM);
+        }
         int product = MODULUS_10;
         int sum = 0;
         final int[] anzahl = new int[10];  // CHECKSTYLE IGNORE MagicNumber
