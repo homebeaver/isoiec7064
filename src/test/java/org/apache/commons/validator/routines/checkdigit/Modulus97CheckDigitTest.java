@@ -67,6 +67,7 @@ public class Modulus97CheckDigitTest extends AbstractIsoIec7064Test {
             , "213800WSGIIZCXF1P572" // Jaguar Land Rover Ltd
             , "M07J9MTYHFCSVRBV2631" // RWE AG (old Style, before 2012.Nov.30)
             , "529900CLVK38HUKPKF71" // SWKBank
+            , "NL004350351B91" // NL VATIN
             };
         invalid = new String[] {"01", "001", "0001"
             , "059163100100"  // Leitweg ohne '-' : Stadt Herne mit falscher PZ
