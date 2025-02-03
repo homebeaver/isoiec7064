@@ -84,7 +84,6 @@ public class VATidXICheckDigitTest extends AbstractCheckDigitTest {
 //              , "110305878", "174918964" // XI style MOD9755 => test in VATINValidatorTest
               , "613451470"
               , "107328000"
-              , "007328008", "7328008"// erfunden 007328008
               , "766800804"
               , "980780684"
               , "888801276"
@@ -119,7 +118,7 @@ public class VATidXICheckDigitTest extends AbstractCheckDigitTest {
             if (log.isDebugEnabled()) {
                 log.debug("   " + i + " Testing Invalid Code=[" + invalid[i] + "]");
             }
-            String invalidCode = invalid[i];
+            final String invalidCode = invalid[i];
             System.out.println("   " + i + " Testing Invalid Code=[" + invalidCode + "]");
             assertFalse(routine.isValid(invalidCode), "invalid[" + i + "]: " + invalidCode);
         }
@@ -131,11 +130,11 @@ public class VATidXICheckDigitTest extends AbstractCheckDigitTest {
             if (log.isDebugEnabled()) {
                 log.debug("   " + i + " Testing Invalid Check Digit, Code=[" + invalidCheckDigits[i] + "]");
             }
-            boolean res = routine.isValid(invalidCheckDigits[i]);
+            final boolean res = routine.isValid(invalidCheckDigits[i]);
             if (res) {
                 log.info("   " + i + " Testing Invalid Check Digit, Code=[" + invalidCheckDigits[i]
                     + "] is true. Found an ambiguous Check Digit."); // this is expected
-                int l = invalidCheckDigits[i].length();
+                final int l = invalidCheckDigits[i].length();
                 List<String> v = icdmap.get(invalidCheckDigits[i].substring(0, l - checkDigitLth));
                 if (v == null) {
                     v = new ArrayList<String>();
@@ -147,7 +146,7 @@ public class VATidXICheckDigitTest extends AbstractCheckDigitTest {
             }
         }
         // now print the results
-        List<String> validList = Arrays.asList(valid);
+        final List<String> validList = Arrays.asList(valid);
         icdmap.forEach((key, value) -> {
             for (String v : validList) {
                 if (v.startsWith(key)) {

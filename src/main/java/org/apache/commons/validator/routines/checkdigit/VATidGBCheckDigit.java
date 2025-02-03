@@ -78,10 +78,6 @@ public final class VATidGBCheckDigit extends ModulusCheckDigit implements IsoIec
         return NUMERIC;
     }
 
-//    /** Weighting given to digits depending on right left position */
-//// TODO remove an use rightPos
-//    private static final int[] POSITION_WEIGHT = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
-//
     /**
      * Calculates the <i>weighted</i> value of a character in the
      * code at a specified position.
@@ -95,10 +91,6 @@ public final class VATidGBCheckDigit extends ModulusCheckDigit implements IsoIec
      */
     @Override
     protected int weightedValue(final int charValue, final int leftPos, final int rightPos) {
-//        if (leftPos + rightPos > POSITION_WEIGHT.length && rightPos >= POSITION_WEIGHT.length) {
-//        	throw new CheckDigitException("No weighted value for char at"+rightPos+" at leftPos " + leftPos);
-//        }
-//        return charValue * POSITION_WEIGHT[rightPos];
         return charValue * rightPos;
 
     }
@@ -148,7 +140,7 @@ public final class VATidGBCheckDigit extends ModulusCheckDigit implements IsoIec
         // one old style MOD 97 and one new style MOD 9755
         // thus, it isn't possible to compute the right one.
         // here I return old style MOD 97 check digit
-        return toCheckDigit(modulusResult == 0 ? 0 : MODULUS_97 - modulusResult);
+        return ((Modulus97CheckDigit)Modulus97CheckDigit.getInstance()).toCheckDigit(modulusResult == 0 ? 0 : MODULUS_97 - modulusResult);
         // this retuens MOD 9755
         //return Modulus97CheckDigit.toCheckDigit(newStyle);
     }
